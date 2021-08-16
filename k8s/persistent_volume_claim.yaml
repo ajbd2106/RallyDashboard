@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: jiraetl
+  name: jiraetl
+spec:
+  storageClassName: localstorage
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 20Gi

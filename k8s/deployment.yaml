@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jiraetl
+  labels:
+    app: jiraetl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jiraetl
+  template:
+    metadata:
+      labels:
+        app: jiraetl
+    spec:
+      containers:
+      - name: jiraetl
+        image: ashu2106/jiraetl:latest
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 5035
+          name: jiraetl
+        volumeMounts:
+        - name: jiraetl
+          # this is the path on the pod container?
+          mountPath: "/Users/ashujha/mnt/data"
+      volumes:
+      - name: jiraetl
+        persistentVolumeClaim:
+          claimName: jiraetl
